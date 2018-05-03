@@ -7,6 +7,6 @@ When you run the script the first time, it will ask you for your login data and 
 Hint: we're working in a very safe environment, the script does currently NOT encrypt your data.
 
 ## ToDo:
-..* allow change and deletion of stored login data
-..* allow the user to enter the ip of the sql database themself (as of now, it's set to the IP of our university's db)
-..* maybe: encryption
+  * allow change and deletion of stored login data
+  * allow the user to enter the ip of the sql database themself (as of now, it's set to the IP of our university's db)
+  * maybe: encryption
