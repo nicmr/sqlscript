@@ -4,6 +4,7 @@ A simple shell script I made for me and my fellow students to facilitate logging
 
 ## How to use:
 When you run the script the first time, it will ask you for your login data and store it for future use. Having completed that process, logging into sql will be as easy as calling the script.
+Hint: we're working in an environment where security is not a major concern, the script does currently NOT encrypt your data.
 
 ## ToDo:
 ..* allow change and deletion of stored login data
