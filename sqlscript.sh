@@ -13,6 +13,4 @@ fi
 
 login="$(cat ~/.sqllogindata)"
 IFS=\\$delimiter read -a loginarr  <<<"$login"
-echo "${loginarr[0]}"
-echo "${loginarr[1]}"
 mysql -h 193.196.143.168 -u "${loginarr[0]}" -p"${loginarr[1]}"
