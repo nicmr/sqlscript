@@ -1,6 +1,6 @@
 # sqlscript
 
-A simple shell script I made for me and my fellow students to facilitate logging into our university's smyql database with the linux bash.
+A simple shell script I made for me and my fellow students to facilitate logging into our university's mysql database with the linux bash.
 
 ## How to use:
 When you run the script the first time, it will ask you for your login data and store it for future use. Having completed that process, logging into mysql will be as easy as calling the script.  
