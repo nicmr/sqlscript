@@ -1,5 +1,23 @@
 #!/bin/bash
+
 delimiter=";"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+OPTIND=1
+
+function generateAlias {
+  if [ ! -f ~/.bash_aliases ]; then
+    touch ~/.bash_aliases
+    echo "alias sqlscript=$DIR/sqlscript.sh" > ~/.bash_aliases
+  else
+    grep "sqlscript" ~/.bash_aliases
+    if [ ! "$?" = "0" ]; then
+      echo "alias sqlscript=$DIR/sqlscript.sh" >> ~/.bash_aliases
+    else
+      echo "alias already exists"
+    fi
+  fi
+}
+
 if [ ! -f  ~/.sqllogindata ]; then
   echo ">No login file found in home, creating a new one."
   echo ">WARNING:  use only in secure environments, data is stored in plain text"
@@ -7,9 +25,18 @@ if [ ! -f  ~/.sqllogindata ]; then
   read username
   echo ">Hi $username, nice to meet you."
   echo ">Please enter your password."
-  read password
+  read -s password
   echo "${username}${delimiter}${password}" >  ~/.sqllogindata
 fi
+
+
+#handle cl arguments
+while getopts "a" opt; do
+  case "$opt" in
+  a) generateAlias 
+     ;;
+  esac
+done
 
 login="$(cat ~/.sqllogindata)"
 IFS=\\$delimiter read -a loginarr  <<<"$login"
