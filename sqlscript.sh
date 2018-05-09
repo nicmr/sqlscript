@@ -25,7 +25,7 @@ if [ ! -f  ~/.sqllogindata ]; then
   read username
   echo ">Hi $username, nice to meet you."
   echo ">Please enter your password."
-  read password
+  read -s password
   echo "${username}${delimiter}${password}" >  ~/.sqllogindata
 fi
 
