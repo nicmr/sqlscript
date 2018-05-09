@@ -4,15 +4,18 @@ delimiter=";"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 OPTIND=1
 
-function generateAlias{
-if [ ! -f ~/.bash_aliases ]; then
-  echo "alias sqlscript=$DIR/sqlscript.sh" > ~/.bash_aliases
-else
-  grep "sqlscript" ~/.bash_aliases
-  if [! "$?" = "0"]; then
-    echo "alias sqlscript=$DIR/sqlscript.sh" >> ~/.bash_aliases
+function generateAlias {
+  if [ ! -f ~/.bash_aliases ]; then
+    touch ~/.bash_aliases
+    echo "alias sqlscript=$DIR/sqlscript.sh" > ~/.bash_aliases
+  else
+    grep "sqlscript" ~/.bash_aliases
+    if [ ! "$?" = "0" ]; then
+      echo "alias sqlscript=$DIR/sqlscript.sh" >> ~/.bash_aliases
+    else
+      echo "alias already exists"
+    fi
   fi
-fi
 }
 
 if [ ! -f  ~/.sqllogindata ]; then
@@ -32,12 +35,9 @@ while getopts "a" opt; do
   case "$opt" in
   a) generateAlias 
      ;;
-}
+  esac
+done
 
 login="$(cat ~/.sqllogindata)"
 IFS=\\$delimiter read -a loginarr  <<<"$login"
 mysql -h 193.196.143.168 -u "${loginarr[0]}" -p"${loginarr[1]}"
-
-
-
-
