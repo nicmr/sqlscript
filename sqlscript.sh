@@ -26,7 +26,7 @@ if [ ! -f  ~/.sqllogindata ]; then
   echo ">Hi $username, nice to meet you."
   echo ">Please enter your password."
   read -s password
-  echo "${username}${delimiter}${password}" >  ~/.sqllogindata
+  echo -n "${username}${delimiter}${password}" | base64 >  ~/.sqllogindata
 fi
 
 
@@ -38,6 +38,7 @@ while getopts "a" opt; do
   esac
 done
 
-login="$(cat ~/.sqllogindata)"
+loginencrypt="$(cat ~/.sqllogindata)"
+login=$(echo -n $login | base64 -d)
 IFS=\\$delimiter read -a loginarr  <<<"$login"
 mysql -h 193.196.143.168 -u "${loginarr[0]}" -p"${loginarr[1]}"
